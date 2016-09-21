@@ -150,31 +150,63 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      // var rows = this.rows();
-      // var columns = this.rows()[0].length;
-      // var count = 0;
-      // var currRow = 0
-      // var currCol = majorDiagonalColumnIndexAtFirstRow;
+      var rows = this.rows();
+      var columns = this.rows()[0].length;
+      var count = 0;
+      var currRow = 0;
+      var currCol = majorDiagonalColumnIndexAtFirstRow;
+      for (var i = currCol; i < columns; i ++ ) {
+        //console.log (rows[currRow]);
+        count += rows[currRow][currCol];
+        //console.log(currRow);
+        currRow ++;
+        currCol ++;
+      }
 
-      // for (var i = currCol; i < columns; i ++ ) {
-      //   console.log (rows[currRow]);
-      //   count += rows[currRow][currCol];
-      //   console.log(currRow);
-      //   currRow ++
-      //   currCol ++
-      // }
-
-      // if (count > 1) {
-      //   return true;
-      // } else {
-      //   console.log('heree');
-      //   return false;
-      // }
+      if (count > 1) {
+        return true;
+      } else {
+        //console.log('heree');
+        return false;
+      }
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      return false; // fixme
+      var matrix = this.rows();
+      
+      var traverseDiag = function (rowIndex, colIndex) {
+        var columns = matrix[rowIndex].length;
+        var count = 0;
+        var currRow = rowIndex;
+        var currCol = colIndex;
+        // adds 1 to count for any match in matrix to bottom right
+        for (var i = currCol; (i < columns) && (currRow < columns); i++) {
+          count += matrix[currRow][currCol];
+          currRow ++;
+          currCol ++;
+        }
+
+        if (count > 1) {
+          return true;
+        } else {
+          return false;
+        }
+      };
+      // TraverseDiag once a pawn is found
+      // For each row 
+      for (var row = 0; row < matrix.length; row++) {
+        // loop through columns
+        for (var col = 0; col < matrix[row].length; col++) {
+          // If match found
+          if (matrix[row][col]) {
+            //call helper function to check for diagonal
+            return traverseDiag(row, col);
+          }
+        }  
+      }
+
+      return false;
     },
 
 

@@ -150,7 +150,26 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      // var rows = this.rows();
+      // var columns = this.rows()[0].length;
+      // var count = 0;
+      // var currRow = 0
+      // var currCol = majorDiagonalColumnIndexAtFirstRow;
+
+      // for (var i = currCol; i < columns; i ++ ) {
+      //   console.log (rows[currRow]);
+      //   count += rows[currRow][currCol];
+      //   console.log(currRow);
+      //   currRow ++
+      //   currCol ++
+      // }
+
+      // if (count > 1) {
+      //   return true;
+      // } else {
+      //   console.log('heree');
+      //   return false;
+      // }
     },
 
     // test if any major diagonals on this board contain conflicts

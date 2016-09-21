@@ -79,8 +79,15 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
-    },
+      var row = this.rows()[rowIndex];
+      var sum = 
+      row.reduce(function(total, square) {
+        return total+square;
+      }, 0);
+      if (sum > 1) {
+        return true;
+      }
+     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {

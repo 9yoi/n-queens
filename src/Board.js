@@ -91,7 +91,18 @@
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var rows = this.rows();
+      var flag = false;
+      rows.forEach(function(row){
+        var sum = 
+        row.reduce(function(total, square) {
+          return total+square;
+        }, 0);
+        if (sum > 1) {
+        flag = true;
+        }
+      });
+      return flag;
     },
 
 

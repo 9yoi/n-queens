@@ -39,22 +39,22 @@ window.countNRooksSolutions = function(n) {
   var board = new Board ({'n': n});
   // get matrix from board (this.rows())
   var matrix = this.rows();
-  // add rook to (0,0)
-  // loop through matrix rows starting at 0
-  //var createBoard = function () {
-    // matrix.forEach(function(row, rowIndex) {
-    //   row.forEach(function(col, colIndex) {
-    //     var newBoard = _.extend({}, board);
-    //     newBoard.togglePiece(rowIndex, colIndex);
-    //     if (!newBoard.hasAnyRowConflicts || !newBoard.hasAnyColConflicts) {
-    //       count++;
-    //     }
-    //   });
-    // });
 
-    // start recursion with empty matrix
-      // create new board
-      // add new piece
+  // make recursion function that takes in matrix and adds rook
+    // loop through each square in matrix
+      // copies current matrix
+      // adds 1 rook to first empty position found
+      // if no conflict
+        // if number of rooks greater than n
+          // count ++
+          // return
+        // else continue recursion on new matrix
+      // else conflict
+        //return
+
+
+
+  // execute recursion function on empty matrix
 
 
 

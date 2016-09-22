@@ -81,26 +81,26 @@
     hasRowConflictAt: function(rowIndex) {
       var row = this.rows()[rowIndex];
       var sum = row.reduce(function(total, square) {
-        return total+square;
+        return total + square;
       }, 0);
       if (sum > 1) {
         return true;
       } else {
         return false;
       }
-     },
+    },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
       var rows = this.rows();
       var flag = false;
-      rows.forEach(function(row){
+      rows.forEach(function(row) {
         var sum = 
         row.reduce(function(total, square) {
-          return total+square;
+          return total + square;
         }, 0);
         if (sum > 1) {
-        flag = true;
+          flag = true;
         }
       });
       return flag;
@@ -155,10 +155,8 @@
       var count = 0;
       var currRow = 0;
       var currCol = majorDiagonalColumnIndexAtFirstRow;
-      for (var i = currCol; i < columns; i ++ ) {
-        //console.log (rows[currRow]);
+      for (var i = currCol; (i < columns) && (currRow < columns); i ++ ) {
         count += rows[currRow][currCol];
-        //console.log(currRow);
         currRow ++;
         currCol ++;
       }
@@ -220,11 +218,9 @@
       var columns = matrix[0].length;
       var count = 0;
       var currRow = 0;
-      var currCol = majorDiagonalColumnIndexAtFirstRow;
-      for (var i = currCol; i >= 0; i --) {
-        //console.log (rows[currRow]);
-        count += rows[currRow][currCol];
-        //console.log(currRow);
+      var currCol = minorDiagonalColumnIndexAtFirstRow;
+      for (var i = currCol; (i >= 0) && (currRow < columns); i --) {
+        count += matrix[currRow][currCol];
         currRow ++;
         currCol --;
       }
@@ -232,7 +228,6 @@
       if (count > 1) {
         return true;
       } else {
-        //console.log('heree');
         return false;
       }
     },

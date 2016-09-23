@@ -34,7 +34,6 @@ window.findNRooksSolution = function(n) {
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
   // var count
-  debugger;
   var solutionCount = 0;
   // make new board
   var board = new Board ({'n': n});
@@ -73,7 +72,24 @@ window.findNQueensSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
-  var solutionCount = undefined; //fixme
+  var solutionCount = 0;
+  var board = new Board ({'n': n});
+
+  var toggleRook = function (row) {
+    if (n === row) {
+      solutionCount++;
+      return;
+    }
+    for (var col = 0; col < n; col++) {
+      board.togglePiece(row, col); 
+      if (!board.hasAnyQueensConflicts()) {
+        toggleRook(row + 1);
+      }
+      board.togglePiece(row, col);
+    }
+  };
+
+  toggleRook(0);
 
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;

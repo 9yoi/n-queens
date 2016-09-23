@@ -144,62 +144,90 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
-      var rows = this.rows();
-      var columns = this.rows()[0].length;
+    //   var rows = this.rows();
+    //   var columns = this.rows()[0].length;
+    //   var count = 0;
+    //   var currRow = 0;
+    //   var currCol = majorDiagonalColumnIndexAtFirstRow;
+    //   for (var i = currCol; (i < columns) && (currRow < columns); i ++ ) {
+    //     count += rows[currRow][currCol];
+    //     currRow ++;
+    //     currCol ++;
+    //   }
+
+    //   if (count > 1) {
+    //     return true;
+    //   } else {
+    //     //console.log('heree');
+    //     return false;
+    //   }
+    // },
+
+
+      var size = this.get('n');
       var count = 0;
-      var currRow = 0;
-      var currCol = majorDiagonalColumnIndexAtFirstRow;
-      for (var i = currCol; (i < columns) && (currRow < columns); i ++ ) {
-        count += rows[currRow][currCol];
-        currRow ++;
-        currCol ++;
+      var rowIdx = 0;
+      var colIdx = majorDiagonalColumnIndexAtFirstRow;
+
+      for ( ; rowIdx < size && colIdx < size; rowIdx++, colIdx++ ) {
+        if ( colIdx >= 0 ) {
+          var row = this.get(rowIdx);
+          count += row[colIdx];
+        }
       }
 
-      if (count > 1) {
-        return true;
-      } else {
-        //console.log('heree');
-        return false;
-      }
+      return count > 1;
     },
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
-      var matrix = this.rows();
+    //   var matrix = this.rows();
       
-      var traverseDiag = function (rowIndex, colIndex) {
-        var columns = matrix[rowIndex].length;
-        var count = 0;
-        var currRow = rowIndex;
-        var currCol = colIndex;
-        // adds 1 to count for any match in matrix to bottom right
-        for (var i = currCol; (i < columns) && (currRow < columns); i++) {
-          count += matrix[currRow][currCol];
-          currRow ++;
-          currCol ++;
-        }
+    //   var traverseDiag = function (rowIndex, colIndex) {
+    //     var columns = matrix[rowIndex].length;
+    //     var count = 0;
+    //     var currRow = rowIndex;
+    //     var currCol = colIndex;
+    //     // adds 1 to count for any match in matrix to bottom right
+    //     for (var i = currCol; (i < columns) && (currRow < columns); i++) {
+    //       count += matrix[currRow][currCol];
+    //       currRow ++;
+    //       currCol ++;
+    //     }
 
-        if (count > 1) {
+    //     if (count > 1) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   };
+    //   // TraverseDiag once a pawn is found
+    //   // For each row 
+    //   for (var row = 0; row < matrix.length; row++) {
+    //     // loop through columns
+    //     for (var col = 0; col < matrix[row].length; col++) {
+    //       // If match found
+    //       if (matrix[row][col]) {
+    //         //call helper function to check for diagonal
+    //         return traverseDiag(row, col);
+    //       }
+    //     }  
+    //   }
+
+    //   return false;
+    // },
+
+      var size = this.get('n');
+
+      for ( var i = 1 - size; i < size; i++ ) {
+        if ( this.hasMajorDiagonalConflictAt(i) ) {
           return true;
-        } else {
-          return false;
         }
-      };
-      // TraverseDiag once a pawn is found
-      // For each row 
-      for (var row = 0; row < matrix.length; row++) {
-        // loop through columns
-        for (var col = 0; col < matrix[row].length; col++) {
-          // If match found
-          if (matrix[row][col]) {
-            //call helper function to check for diagonal
-            return traverseDiag(row, col);
-          }
-        }  
       }
 
       return false;
     },
+
 
 
 
@@ -208,58 +236,82 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      var matrix = this.rows();
-      var columns = matrix[0].length;
+    //   var matrix = this.rows();
+    //   var columns = matrix[0].length;
+    //   var count = 0;
+    //   var currRow = 0;
+    //   var currCol = minorDiagonalColumnIndexAtFirstRow;
+    //   for (var i = currCol; (i >= 0) && (currRow < columns); i --) {
+    //     count += matrix[currRow][currCol];
+    //     currRow ++;
+    //     currCol --;
+    //   }
+
+    //   if (count > 1) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // },
+      var size = this.get('n');
       var count = 0;
-      var currRow = 0;
-      var currCol = minorDiagonalColumnIndexAtFirstRow;
-      for (var i = currCol; (i >= 0) && (currRow < columns); i --) {
-        count += matrix[currRow][currCol];
-        currRow ++;
-        currCol --;
+      var rowIdx = 0;
+      var colIdx = minorDiagonalColumnIndexAtFirstRow;
+
+      for ( ; rowIdx < size && colIdx >= 0; rowIdx++, colIdx-- ) {
+        if ( colIdx < size ) {
+          var row = this.get(rowIdx);
+          count += row[colIdx];
+        }
       }
 
-      if (count > 1) {
-        return true;
-      } else {
-        return false;
-      }
+      return count > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      var matrix = this.rows();
+    //   var matrix = this.rows();
       
-      var traverseDiag = function (rowIndex, colIndex) {
-        var columns = matrix[rowIndex].length;
-        var count = 0;
-        var currRow = rowIndex;
-        var currCol = colIndex;
+    //   var traverseDiag = function (rowIndex, colIndex) {
+    //     var columns = matrix[rowIndex].length;
+    //     var count = 0;
+    //     var currRow = rowIndex;
+    //     var currCol = colIndex;
 
-        // adds 1 to count for any match in matrix to bottom left
-        for (var i = currCol; (i >= 0) && (currRow < columns); i--) {
-          count += matrix[currRow][currCol];
-          currRow ++;
-          currCol --;
-        }
+    //     // adds 1 to count for any match in matrix to bottom left
+    //     for (var i = currCol; (i >= 0) && (currRow < columns); i--) {
+    //       count += matrix[currRow][currCol];
+    //       currRow ++;
+    //       currCol --;
+    //     }
 
-        if (count > 1) {
+    //     if (count > 1) {
+    //       return true;
+    //     } else {
+    //       return false;
+    //     }
+    //   };
+    //   // TraverseDiag once a pawn is found
+    //   // For each row 
+    //   for (var row = 0; row < matrix.length; row++) {
+    //     // loop through columns
+    //     for (var col = 0; col < matrix[row].length; col++) {
+    //       // If match found
+    //       if (matrix[row][col]) {
+    //         //call helper function to check for diagonal
+    //         return traverseDiag(row, col);
+    //       }
+    //     }  
+    //   }
+
+    //   return false;
+    // }
+      var size = this.get('n');
+
+      for ( var i = (size * 2) - 1; i >= 0; i-- ) {
+        if ( this.hasMinorDiagonalConflictAt(i) ) {
           return true;
-        } else {
-          return false;
         }
-      };
-      // TraverseDiag once a pawn is found
-      // For each row 
-      for (var row = 0; row < matrix.length; row++) {
-        // loop through columns
-        for (var col = 0; col < matrix[row].length; col++) {
-          // If match found
-          if (matrix[row][col]) {
-            //call helper function to check for diagonal
-            return traverseDiag(row, col);
-          }
-        }  
       }
 
       return false;

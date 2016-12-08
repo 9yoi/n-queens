@@ -1,2 +1,1 @@
-#n-queens
-This is a project I completed as a student at [hackreactor](http://hackreactor.com). This project was worked on with a pair.
+Created board to solve n-queens problem using jquery and backbone
